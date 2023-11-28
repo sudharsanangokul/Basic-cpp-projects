@@ -1,0 +1,613 @@
+#include<iostream>
+#include <cstdlib>
+#include <ctime>
+#include<string>
+#include<fstream>
+using namespace std;
+class Question {
+protected:
+    string question;
+    string answer;
+public:
+    Question(string q, string a) {
+        question = q;
+        answer = a;
+    }
+
+    void display() {
+        cout << question << endl;
+    }
+
+    bool checkAnswer(string a) {
+        return a == answer;
+    }
+};
+
+class MultipleChoiceQuestion : public Question {
+private:
+    string options[4];
+    int correctOption;
+public:
+    MultipleChoiceQuestion(string q, string a, string o1, string o2, string o3, string o4, int co) : Question(q, a) {
+        options[0] = o1;
+        options[1] = o2;
+        options[2] = o3;
+        options[3] = o4;
+        correctOption = co;
+    }
+
+    void display() {
+        Question::display();
+        for (int i = 0; i < 4; i++) {
+            cout << i+1 << ". " << options[i] << endl;
+        }
+    }
+
+    bool checkAnswer(int a) {
+        return a == correctOption;
+    }
+};
+
+int main()
+{
+    int user1,user2,unum1=0,unum2=0,win,ra_no,rad_no,rad_no1,ag,ra_no1,count=0,flag,inp,res,num,res1,playerHealth=50,playerAttack=10,monsterHealth=50,monsterAttack=10,fi,fi1,fi2;
+    string player1,player2,playerName,gname;
+    char ch='y',agame,whi='y';
+    cout<<"";
+    while((whi=='y')||(whi=='y')){
+    cout<<"Available the games are:\n\t\t1-> Snake and Ladder\n\t\t2-> Adventure Game\n\t\t3-> Number Guessing\n";
+    cout<<"Enter the game number to be played:";
+    cin>>inp;
+    if(inp==1)
+    {
+    while((ch=='y')||(ch=='Y'))
+    {
+    flag=0;
+    cout<<"\t\tSNAKE AND LADDER"<<endl;
+    cout<<"\nEnter the name of first player:";
+    cin.ignore();
+    getline(cin,player1);
+    cout<<"\nEnter the name of second player:";
+    getline(cin,player2);
+    cout<<"\nPLAYER 1 = *\nPLAYER 2 = #";
+    cout<<"\n3 to 12\t\t21 to 29\t-> LADDER\n26 to 10\t28 to 17\t-> SNAKE\n1 and 6\t-> Another chance\n";
+    cout<<"\n";
+    cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t12\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+        start:
+        while(flag!=30){
+        cout<<"\nPlayer "<<player1<<" press 1 to roll the dice:";
+        cin>>user1;
+        srand(time(0));
+        ra_no = rand() % 6;     //2
+        if(user1==1)
+        {
+            
+            //cout << "The random number is: " << ra_no << endl;
+            unum1=unum1+ra_no;      //1+2
+            if(unum1==0)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t12\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+                
+            }
+            else if(unum1==1)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t12\t13\t14\t15\n10\t9\t8\t7\t6\n*\t2\t3\t4\t5\n";
+            }
+            else if(unum1==2)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t12\t13\t14\t15\n10\t9\t8\t7\t6\n1\t*\t3\t4\t5\n";
+                
+            }
+            else if(unum1==3)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t*\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+                cout<<"\nohh you got the ladder!!!\n";
+                unum1=12;
+            }
+            else if(unum1==4)
+            {
+               cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t12\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t*\t5\n";
+               
+            }
+            else if(unum1==5)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t12\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t*\n";
+              
+            }
+            else if(unum1==6)
+            {
+               cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t12\t13\t14\t15\n10\t9\t8\t7\t*\n1\t2\t3\t4\t5\n";
+            }
+            else if(unum1==7)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t12\t13\t14\t15\n10\t9\t8\t*\t6\n1\t2\t3\t4\t5\n";   
+            }
+            else if(unum1==8)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t12\t13\t14\t15\n10\t9\t*\t7\t6\n1\t2\t3\t4\t5\n";
+            }
+            else if(unum1==9)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t12\t13\t14\t15\n10\t*\t8\t7\t6\n1\t2\t3\t4\t5\n";
+            }
+            else if(unum1==10)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t12\t13\t14\t15\n*\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+                
+            }
+            else if(unum1==11)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n*\t12\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+            }
+            else if(unum1==12)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t*\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+            }
+            else if(unum1==13)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t12\t*\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+            }
+            else if(unum1==14)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t12\t13\t*\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+            }
+            else if(unum1==15)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t12\t13\t14\t*\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+            }
+            else if(unum1==16)
+            {
+               cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t*\n11\t12\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+            }
+            else if(unum1==17)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t*\t16\n11\t12\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+            }
+            else if(unum1==18)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t*\t17\t16\n11\t12\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+    
+            }
+            else if(unum1==19)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t*\t18\t17\t16\n11\t12\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+            }
+            else if(unum1==20)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n*\t19\t18\t17\t16\n11\t12\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";            
+            }
+            else if(unum1==21)
+            {
+                cout<<"\n30\t*\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t12\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+                cout<<"\nohh you got the ladder!!!\n";
+                unum1=29;
+                
+            }
+            else if(unum1==22)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t*\t23\t24\t25\n20\t19\t18\t17\t16\n11\t12\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+            }
+           else if(unum1==23)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t*\t24\t25\n20\t19\t18\t17\t16\n11\t12\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+            }
+            else if(unum1==24)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t*\t25\n20\t19\t18\t17\t16\n11\t12\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+            }
+            else if(unum1==25)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t*\n20\t19\t18\t17\t16\n11\t12\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+            }
+            else if(unum1==26)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t12\t13\t14\t15\n*\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+                cout<<"\nohh you were bitten by a snake!!!\n";
+                unum1=10;
+            }
+            else if(unum1==27)
+            {
+               cout<<"\n30\t29\t28\t*\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t12\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+            }
+            else if(unum1==28)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t*\t16\n11\t12\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+                cout<<"\nohh you were bitten by a snake!!!\n";
+                unum1=17;
+            }
+            else if(unum1==29)
+            {
+                cout<<"\n30\t*\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t12\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+            }
+            else if(unum1>=30)
+            {
+               cout<<"\n*\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t12\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+               flag=30;
+            }
+            else{
+                cout<<"\n";
+            }
+            if((ra_no==1)||(ra_no==6))
+            {
+                cout<<"You got an other chance!!..";
+                goto start;
+            }
+            if(flag==30)
+            {
+                cout<<"Player "<<player1<<" wins!!\n";
+                cout<<"Do you want to play again:";
+                cin>>ch;
+                fi=1;
+            }
+       // count=count+1;
+        //if(count==5){win=50;}
+        }if(flag!=30){
+        start1:
+        cout<<"\nPlayer "<<player2<<" press 2 to roll the dice:";
+        cin>>user2;
+        srand(time(0));
+        ra_no1 = rand() % 6;
+        if(user2==2)
+        {
+            
+            //cout << "The random number is: " << ra_no << endl;
+            unum2=unum2+ra_no1;      //1+2
+            if(unum2==0)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t12\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+                
+            }
+            else if(unum2==1)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t12\t13\t14\t15\n10\t9\t8\t7\t6\n#\t2\t3\t4\t5\n";
+            }
+            else if(unum2==2)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t12\t13\t14\t15\n10\t9\t8\t7\t6\n1\t#\t3\t4\t5\n";
+                
+            }
+            else if(unum2==3)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t#\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+                cout<<"\nohh you got the ladder!!!\n";
+                unum1=12;
+            }
+            else if(unum2==4)
+            {
+               cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t12\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t#\t5\n";
+               
+            }
+            else if(unum2==5)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t12\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t#\n";
+              
+            }
+            else if(unum2==6)
+            {
+               cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t12\t13\t14\t15\n10\t9\t8\t7\t#\n1\t2\t3\t4\t5\n";
+            }
+            else if(unum2==7)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t12\t13\t14\t15\n10\t9\t8\t#\t6\n1\t2\t3\t4\t5\n";   
+            }
+            else if(unum2==8)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t12\t13\t14\t15\n10\t9\t#\t7\t6\n1\t2\t3\t4\t5\n";
+            }
+            else if(unum2==9)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t12\t13\t14\t15\n10\t#\t8\t7\t6\n1\t2\t3\t4\t5\n";
+            }
+            else if(unum2==10)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t12\t13\t14\t15\n#\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+                
+            }
+            else if(unum2==11)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n#\t12\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+            }
+            else if(unum2==12)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t#\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+            }
+            else if(unum2==13)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t12\t#\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+            }
+            else if(unum2==14)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t12\t13\t#\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+            }
+            else if(unum2==15)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t12\t13\t14\t#\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+            }
+            else if(unum2==16)
+            {
+               cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t#\n11\t12\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+            }
+            else if(unum2==17)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t#\t16\n11\t12\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+            }
+            else if(unum2==18)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t#\t17\t16\n11\t12\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+    
+            }
+            else if(unum2==19)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t#\t18\t17\t16\n11\t12\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+            }
+            else if(unum2==20)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n#\t19\t18\t17\t16\n11\t12\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";            
+            }
+            else if(unum2==21)
+            {
+                cout<<"\n30\t#\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t12\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+                cout<<"\nohh you got the ladder!!!\n";
+                unum1=29;
+                
+            }
+            else if(unum2==22)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t#\t23\t24\t25\n20\t19\t18\t17\t16\n11\t12\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+            }
+           else if(unum2==23)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t#\t24\t25\n20\t19\t18\t17\t16\n11\t12\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+            }
+            else if(unum2==24)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t#\t25\n20\t19\t18\t17\t16\n11\t12\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+            }
+            else if(unum2==25)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t#\n20\t19\t18\t17\t16\n11\t12\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+            }
+            else if(unum2==26)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t12\t13\t14\t15\n#\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+                cout<<"\nohh you were bitten by a snake!!!\n";
+                unum1=10;
+            }
+            else if(unum2==27)
+            {
+           cout<<"\n30\t29\t28\t#\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t12\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+            }
+            else if(unum2==28)
+            {
+                cout<<"\n30\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t#\t16\n11\t12\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+                cout<<"\nohh you were bitten by a snake!!!\n";
+                unum2=17;
+            }
+            else if(unum2==29)
+            {
+                cout<<"\n30\t#\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t12\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+            }
+            else if(unum2>=30)
+            {
+               cout<<"\n#\t29\t28\t27\t26\n21\t22\t23\t24\t25\n20\t19\t18\t17\t16\n11\t12\t13\t14\t15\n10\t9\t8\t7\t6\n1\t2\t3\t4\t5\n";
+                flag=30;
+            }
+             else{
+                cout<<"\n";
+            }
+            if((ra_no1==1)||(ra_no1==6))
+            {
+                cout<<"You got an other chance!!..";
+                goto start1;
+            }
+            if(flag==30)
+            {
+                cout<<"Player "<<player2<<" wins!!\n";
+                cout<<"Do you want to play again:";
+                cin>>ch;
+                fi=2;
+            }
+        }
+    
+    }
+    }
+    }  
+     
+    //File
+    ofstream fout;
+    fout.open("Games.txt",ios::app);
+    fout<<"Player 1 name:"<<player1<<"\n"<<"player 2 name:"<<player2<<"\n";
+    if(fi==1)
+    {
+        fout<<"player 1 "<<player1<<" wins";
+    }
+    else if(fi==2)
+    {
+        fout<<"player 2 "<<player2<<" wins";
+    }
+    }
+    else if(inp==2)
+    {
+    ad:
+    monsterHealth=50;
+    playerHealth=50;
+    cout<<"Welcome to the adventure game!"<<endl;
+    cout<< "Please enter your name:";
+    cin>>playerName;
+    cout<<"Your starting stats are:"<<endl;
+    cout<<"Health:"<<playerHealth<<endl;
+    cout<<"Attack:"<<playerAttack<<endl;
+    while((playerHealth>0)&&(monsterHealth>0))
+    {
+        cout<<"Do you want to attack or Defend\n1-> Attack\n2-> Defend";
+        cin>>ag;
+        if(ag==1)
+        {
+            srand(time(0));
+            rad_no =1+rand() % 2;
+            if(rad_no==1)
+            {
+                monsterHealth=monsterHealth-10;
+                cout<<"You attacked the monster\nThe monster missed you!!\n";
+                cout<<"Player Health:"<<playerHealth<<endl;
+                cout<<"Monster Health:"<<monsterHealth<<endl;
+            }
+            else
+            {
+                playerHealth=playerHealth-10;
+                cout<<"The monster atacked you\nyou missed monster!!\n";
+                cout<<"Player Health:"<<playerHealth<<endl;
+                cout<<"Monster Health:"<<monsterHealth<<endl;
+            }
+        }
+        else if(ag==2)
+        {
+            srand(time(0));
+            rad_no1 =1+rand() % 2;
+             if(rad_no==1)
+            {
+                cout<<"The monster missed you!!\nInstead of defence you may attack the monster :)";
+                cout<<"Player Health:"<<playerHealth<<endl;
+                cout<<"Monster Health:"<<monsterHealth<<endl;
+            }
+            else
+            {
+                cout<<"The monster atacked you\nyour choice saved you from monster :)\n";
+                cout<<"Player Health:"<<playerHealth<<endl;
+                cout<<"Monster Health:"<<monsterHealth<<endl;
+            }
+        }
+        if(playerHealth==0)
+        {
+            cout<<"ohh you bad decision made the monster to win :(\n";
+            cout<<"Do you want to play the game again:";
+            cin>>agame;
+            fi1=1;
+            if((agame=='Y')||(agame=='y'))
+            {
+                goto ad;
+            }
+        }
+        else if(monsterHealth==0)
+        {
+            cout<<"ohh you beat the monster,congratulations!!\n";
+            cout<<"Do you want to play the game again:";
+            cin>>agame;
+            fi2=2;
+            if((agame=='Y')||(agame=='y'))
+            {
+                goto ad;
+            }
+        }
+    }
+    //File
+    ofstream fout;
+    fout.open("Games.txt",ios::app);
+    if(fi1==1)
+    {
+        fout<<"player name: "<<playerName<<"\n"<<"You are defeated!!";
+    }
+    else if(fi1==2)
+    {
+        fout<<"player name: "<<playerName<<"\n"<<"You won the game!!";
+    }
+    }
+    else if(inp==3)
+    {
+    start3:
+    cout<<"****************************************************************\n";
+    cout<<"Enter the player name:";
+    getline(cin,gname);
+    cout<<"I have a number between 1 and 1000\tCan you guess my number?\n";
+    cout<<"\nPlease type your guess:";
+    cin>>num;
+    res=1+(rand()%1001);
+    if(count==0)
+    {
+        res1=res;
+    }
+    if(res1==num)
+    {
+        if(count<10)
+        {
+            cout<<"You Entered correct number!!!..\n";
+            cout<<"Either you know the secret or you got lucky!\n";
+            cout<<"Your number of guesses are:\n"<<count;
+        }
+        else if(count==10)
+        {
+            cout<<"You Entered correct number!!!..\n";
+            cout<<"Ahah! You know the secret!\n";
+            cout<<"Your number of guesses are:\n"<<count;
+        }
+        else
+        {
+            cout<<"You Entered correct number!!!..\n";
+            cout<<"You should be able to do better!\n";
+            cout<<"Your number of guesses are:\n"<<count;
+        }
+    }
+    else
+    {
+        count++;
+        cout<<"You Entered incorrect number try again!!..\n";
+        if(res1>num)
+        {
+            cout<<"Your guess is less\n";
+            goto start3;
+        }
+        else
+        {
+            cout<<"Your guess is high\n";
+            goto start3;
+        }
+    }
+    //File
+    ofstream fout;
+    fout.open("Games.txt",ios::app);
+    fout<<"Player name:"<<gname<<"\n"<<"Yoyr number of guess:"<<count;
+}
+    else if(inp==4)
+    {
+        srand(time(0));
+
+    Question* questions[3];
+    questions[0] = new MultipleChoiceQuestion("What is the capital of France?", "Paris", "Rome", "Madrid", "Paris", "Berlin", 3);
+    questions[1] = new MultipleChoiceQuestion("What is the largest country in the world by area?", "Russia", "USA", "China", "Russia", "Canada", 4);
+    questions[2] = new Question("What is the highest mountain in the world?", "Mount Everest");
+
+    int score = 0;
+
+    for (int i = 0; i < 3; i++) {
+        int randomIndex = rand() % 3;
+        questions[randomIndex]->display();
+
+        string answer;
+        cin >> answer;
+
+        if (questions[randomIndex]->checkAnswer(answer)) {
+            cout << "Correct!" << endl;
+            score++;
+        } else {
+            cout << "Incorrect!" << endl;
+        }
+
+        cout << endl;
+    }
+
+    cout << "Your final score is: " << score << endl;
+    ofstream fout;
+    fout.open("Games.txt",ios::app);
+    fout<<"Your total score is:\t"<<score<<endl;
+    fout.close();
+    }
+    else
+    {
+        cout<<"Enter the correct number!!!...";
+    }
+  
+    cout<<"Do you want to continue playing(y/n):";
+    cin.ignore();
+    cin>>whi;}
+    return 0;
+}
